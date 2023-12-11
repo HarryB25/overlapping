@@ -2,7 +2,6 @@ import numpy as np
 import scipy.io as io
 from scipy.optimize import minimize
 import matplotlib.pyplot as plt
-from utils.COPRA import *
 
 
 def objective_function(rho, X, y, lambda_value):
