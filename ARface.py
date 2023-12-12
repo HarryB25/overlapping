@@ -41,7 +41,7 @@ if __name__ == '__main__':
     x_size, y_size = result_matrix_CR1.shape
 
     # 创建3D图表
-    fig = plt.figure()
+    fig = plt.figure(figsize = (10, 10))
     ax = fig.add_subplot(111, projection='3d')
 
     # 生成X和Y的坐标
