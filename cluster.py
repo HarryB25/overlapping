@@ -26,13 +26,6 @@ if __name__ == '__main__':
     data = df.values
     data = data.T
 
-    # 读取ar.mat文件
-    ar_face = io.loadmat('ar.mat')
-    ar_face = ar_face['data']  # ar_face的形状为（50， 40， 3120），50*40的图像，共3120张，每人26张，共120人
-    ar_face = ar_face.reshape(50 * 40, 3120)  # 拉直图像，将每张图像变成一列
-    ar_face = ar_face.reshape(2000, 120, 26)  # 将ar_face改为（2000, 120, 26），每一列为一个人的图像
-    data = ar_face[:, 0, :]
-
     # 按列映射到[0,1]区间
     # data = (data - data.min(axis=0)) / (data.max(axis=0) - data.min(axis=0))
     dim, num_person = data.shape
@@ -204,7 +197,7 @@ if __name__ == '__main__':
     plt.axis('off')
     plt.show()
 
-    alpha_value = 1.5
+    alpha_value = 0.8
     lfm = LFM(G_DM, alpha_value)
 
     # 执行社区发现
@@ -217,5 +210,5 @@ if __name__ == '__main__':
 
     A = array(nx.adjacency_matrix(G_DM).todense())
     degree_s, neighbours, sums = Degree_Sorting(A, len(G_DM.nodes()), G_DM)
-    PR = relevance(G_DM, 8, 0.1)
+    PR = relevance(G_DM, 8, 0.8)
     getcoms(degree_s, neighbours, sums, A, 9, len(G_DM.nodes()), PR, G_DM)

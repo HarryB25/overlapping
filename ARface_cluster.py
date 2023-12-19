@@ -22,10 +22,6 @@ if __name__ == '__main__':
     # hyperparameters
     lambda_value_CR = 1
 
-    df = pd.read_excel('assessment.xlsx')
-    data = df.values
-    data = data.T
-
     # 读取ar.mat文件
     ar_face = io.loadmat('ar.mat')
     ar_face = ar_face['data']  # ar_face的形状为（50， 40， 3120），50*40的图像，共3120张，每人26张，共120人
