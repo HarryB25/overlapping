@@ -212,10 +212,44 @@ if __name__ == '__main__':
 
     # 打印结果
     print("Detected Communities:")
+
+    m = len(communities)
+    n = max(len(c) for c in communities)
+    fig, axes = plt.subplots(m, n, figsize=(20, 20))
+
     for i, community_nodes in enumerate(communities):
         print(f"Community {i + 1}: {community_nodes}")
+        for j, person_id in enumerate(community_nodes):
+            face = data[:, person_id-1].reshape(50, 40)
+            axes[i, j].imshow(face, cmap='gray')
+
+    # 关闭所有坐标轴
+    for ax in axes.flatten():
+        ax.axis('off')
+
+    # 显示图像
+    fig.show()
 
     A = array(nx.adjacency_matrix(G_DM).todense())
     degree_s, neighbours, sums = Degree_Sorting(A, len(G_DM.nodes()), G_DM)
     PR = relevance(G_DM, 8, 0.1)
-    getcoms(degree_s, neighbours, sums, A, 9, len(G_DM.nodes()), PR, G_DM)
+    coms = getcoms(degree_s, neighbours, sums, A, 9, len(G_DM.nodes()), PR, G_DM)
+
+    coms = list(coms.values())
+
+    m = len(coms)
+    n = max(len(c) for c in coms)
+    fig, axes = plt.subplots(m, n, figsize=(20, 20))
+
+    for i, community_nodes in enumerate(coms):
+        print(f"Community {i + 1}: {community_nodes}")
+        for j, person_id in enumerate(community_nodes):
+            face = data[:, person_id - 1].reshape(50, 40)
+            axes[i, j].imshow(face, cmap='gray')
+
+    # 关闭所有坐标轴
+    for ax in axes.flatten():
+        ax.axis('off')
+
+    # 显示图像
+    fig.show()
